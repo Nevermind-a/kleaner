@@ -34,7 +34,10 @@ sudo curl -o /etc/udev/rules.d/60-steam-input.rules \
 
 # === OpenRGB udev rules ===
 echo "Installiere OpenRGB udev rules..."
-sudo curl -L https://openrgb.org/releases/release_0.9/openrgb-udev-install.sh | sudo bash
+sudo mkdir -p /etc/udev/rules.d
+sudo sh -c 'flatpak run org.openrgb.OpenRGB --print-udev-rules > /etc/udev/rules.d/60-openrgb.rules'
+sudo udevadm control --reload-rules
+sudo udevadm trigger
 
 # === Mountpoint für 2. SSD ===
 echo "Erstelle Mountpoint /mnt/data1..."
